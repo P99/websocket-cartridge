@@ -3,37 +3,19 @@ Cartridge-Short-Name: WS
 Display-Name: WebSoclets enabler
 Description: "Enable websocket connectivity on port 8000 for existing applications"
 Version: '0.1'
-License: "ASL 2.0"
-License-Url: http://www.apache.org/licenses/LICENSE-2.0.txt
-Source-Url: https://github.com/P99/websocket-cartridge.git
 Cartridge-Version: 0.0.1
 Cartridge-Vendor: p99
 Vendor: p99
 Categories:
   - service
-Website:
-Help-Topics:
-  "Getting Started": https://openshift.redhat.com/community/developers
 Provides:
   - ws
-Publishes:
-  publish-http-url:
-    Type: "NET_TCP:httpd-proxy-info"
-  publish-gear-endpoint:
-    Type: "NET_TCP:gear-endpoint-info"
-Subscribes:
-  set-db-connection-info:
-    Type: "ENV:NET_TCP:db:connection-info"
-    Required: false
-  set-nosql-db-connection-info:
-    Type: "ENV:NET_TCP:nosqldb:connection-info"
-    Required: false
 Scaling:
   Min: 1
   Max: 1
 Group-Overrides:
   - components:
-    - web-proxy
+    - web-sockets
 Endpoints:
   - Private-IP-Name: IP
     Private-Port-Name: PORT
