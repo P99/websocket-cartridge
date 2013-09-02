@@ -3,19 +3,22 @@ Cartridge-Short-Name: WS
 Display-Name: WebSoclets enabler
 Description: "Enable websocket connectivity on port 8000 for existing applications"
 Version: '0.1'
+Website: https://github.com/P99/websocket-cartridge
 Cartridge-Version: 0.0.1
 Cartridge-Vendor: p99
 Vendor: p99
 Categories:
   - service
 Provides:
-  - ws
+  - ws-1.0
+  - "ws"
 Scaling:
   Min: 1
   Max: 1
 Group-Overrides:
   - components:
-    - web-sockets
+    - ws-1.0
+Install-Build-Required: false
 Endpoints:
   - Private-IP-Name: IP
     Private-Port-Name: PORT
