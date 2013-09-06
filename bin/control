@@ -1,2 +1,41 @@
 #!/bin/bash
-echo "[OpenShift] [websocket-cartridge] control"
+
+PATH=/bin/:/usr/sbin:$PATH
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+
+echo "[OpenShift] [websocket-cartridge] setup"
+
+function start {
+    /usr/sbin/socat TCP-L:$OPENSHIFT_WS_PROXY_PORT TCP:localhost:8000&
+}
+
+function stop {
+    killall socat
+}
+
+function restart {
+    killall socat
+    /usr/sbin/socat TCP-L:$OPENSHIFT_WS_PROXY_PORT TCP:localhost:8000&
+}
+
+function catchall {
+    echo "not yet implemented"
+}
+
+case "$1" in
+  start)       start ;;
+  stop)        stop ;;
+  restart)     restart ;;
+  status)      status ;;
+  reload)      catchall ;;
+  tidy)        catchall ;;
+  pre-build)   catchall ;;
+  build)       catchall ;;
+  deploy)      catchall ;;
+  post-deploy) catchall ;;
+  *)           exit 0
+esac
+
+exit 0
+
+
