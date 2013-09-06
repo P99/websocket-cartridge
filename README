@@ -3,5 +3,11 @@ This is dumy cartridge to add websocket functionality to existing application
 Tha manifest.yml file give access to websocket functionality
 Socat binary is used to redirect all request from LOCAL_PORT to 8000
 
+About socat
+Enbedded version is 2.0.0-b6
+Downloaded from: http://www.dest-unreach.org/socat/download/socat-2.0.0-b6.tar.gz
+Built with the following options:
+./configure --prefix=/usr/sbin --disable-openssl --disable-readline --disable-sycls --disable-filan --disable-fips
+
 Regsiter to the  application web portal with the following link
 http://cartreflect-claytondev.rhcloud.com/reflect?github=P99/websocket-cartridge
