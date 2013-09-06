@@ -6,7 +6,7 @@ source $OPENSHIFT_CARTRIDGE_SDK_BASH
 echo "[OpenShift] [websocket-cartridge] setup"
 
 function start {
-    /usr/sbin/socat TCP-L:$OPENSHIFT_WS_PROXY_PORT TCP:localhost:8000&
+    /usr/sbin/socat TCP-L:$OPENSHIFT_WS_PORT TCP:localhost:8000&
 }
 
 function stop {
@@ -15,7 +15,7 @@ function stop {
 
 function restart {
     killall socat
-    /usr/sbin/socat TCP-L:$OPENSHIFT_WS_PROXY_PORT TCP:localhost:8000&
+    /usr/sbin/socat TCP-L:$OPENSHIFT_WS_PORT TCP:localhost:8000&
 }
 
 function catchall {
