@@ -1,0 +1,7 @@
+This is dumy cartridge to add websocket functionality to existing application
+
+Tha manifest.yml file give access to websocket functionality
+Socat binary is used to redirect all request from LOCAL_PORT to 8000
+
+Regsiter to the  application web portal with the following link
+http://cartreflect-claytondev.rhcloud.com/reflect?github=P99/websocket-cartridge
