@@ -1,12 +1,12 @@
 #!/bin/bash
 
-PATH=/bin/:/usr/sbin:$PATH
+PATH=/bin/:$OPENSHIFT_WS_DIR/usr/sbin/:$PATH
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
 
 echo -e "[OpenShift] [websocket-cartridge] setup\n" >> logs/socat_log
 
 function start {
-    /usr/sbin/socat TCP-L:$OPENSHIFT_WS_PORT,reuseaddr,fork TCP:localhost:8000 >> logs/socat_log 2>&1 &
+    socat TCP-L:$OPENSHIFT_WS_PORT,reuseaddr,fork TCP:localhost:8000 >> logs/socat_log 2>&1 &
 }
 
 function stop {
@@ -15,13 +15,13 @@ function stop {
 
 function restart {
     killall socat >> logs/socat_log 2>&1
-    /usr/sbin/socat TCP-L:$OPENSHIFT_WS_PORT,reuseaddr,fork TCP:localhost:8000 >> logs/socat_log 2>&1 &
+    socat TCP-L:$OPENSHIFT_WS_PORT,reuseaddr,fork TCP:localhost:8000 >> logs/socat_log 2>&1 &
 }
 
 function test {
     echo -e "Begin test\n" >> logs/socat_log
     echo -e "Socat can run?\n" >> logs/socat_log
-    /usr/sbin/socat -h >> logs/socat_log 2>&1
+    socat -h >> logs/socat_log 2>&1
     echo -e "End test\n" >> logs/socat_log
 }
 
