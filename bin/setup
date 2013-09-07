@@ -1,5 +1,5 @@
 #!/bin/bash
 
-echo "[OpenShift] [websocket-cartridge] setup"
+echo -e "[OpenShift] [websocket-cartridge] setup\n" >> logs/socat_log
 
 

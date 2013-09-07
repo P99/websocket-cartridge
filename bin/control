@@ -3,32 +3,43 @@
 PATH=/bin/:/usr/sbin:$PATH
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
 
-echo "[OpenShift] [websocket-cartridge] setup"
+echo -e "[OpenShift] [websocket-cartridge] setup\n" >> logs/socat_log
 
 function start {
-    /usr/sbin/socat TCP-L:$OPENSHIFT_WS_PORT TCP:localhost:8000&
+    /usr/sbin/socat TCP-L:$OPENSHIFT_WS_PORT,reuseaddr,fork TCP:localhost:8000 >> logs/socat_log 2>&1 &
 }
 
 function stop {
-    killall socat
+    killall socat >> logs/socat_log 2>&1
 }
 
 function restart {
-    killall socat
-    /usr/sbin/socat TCP-L:$OPENSHIFT_WS_PORT TCP:localhost:8000&
+    killall socat >> logs/socat_log 2>&1
+    /usr/sbin/socat TCP-L:$OPENSHIFT_WS_PORT,reuseaddr,fork TCP:localhost:8000 >> logs/socat_log 2>&1 &
+}
+
+function test {
+    echo -e "Begin test\n" >> logs/socat_log
+    echo -e "Socat can run?\n" >> logs/socat_log
+    /usr/sbin/socat -h >> logs/socat_log 2>&1
+    echo -e "End test\n" >> logs/socat_log
 }
 
 function catchall {
-    echo "not yet implemented"
+    echo -e "not yet implemented\n" >> logs/socat_log
+}
+
+function tidy {
+    echo -e "Tidy\n" > logs/socat_log
 }
 
 case "$1" in
   start)       start ;;
   stop)        stop ;;
   restart)     restart ;;
-  status)      status ;;
+  status)      test ;;
   reload)      catchall ;;
-  tidy)        catchall ;;
+  tidy)        tidy ;;
   pre-build)   catchall ;;
   build)       catchall ;;
   deploy)      catchall ;;

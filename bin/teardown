@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo "[OpenShift] [websocket-cartridge] teardown"
+echo -e "[OpenShift] [websocket-cartridge] teardown\n" >> logs/socat_log
