@@ -7,7 +7,7 @@ source $OPENSHIFT_CARTRIDGE_SDK_BASH
 echo -e "[OpenShift] [websocket-cartridge] setup - $1\n" >> logs/socat_log
 
 function start {
-    socat TCP-L:$OPENSHIFT_WS_PORT,reuseaddr,fork TCP:localhost:8000 >> logs/socat_log 2>&1 &
+    socat TCP-L:$OPENSHIFT_WS_PORT,bind=$OPENSHIFT_WS_IP,reuseaddr,fork TCP:$OPENSHIFT_WS_IP:8000 >> logs/socat_log 2>&1 &
 }
 
 function stop {
@@ -16,7 +16,7 @@ function stop {
 
 function restart {
     killall socat >> logs/socat_log 2>&1
-    socat TCP-L:$OPENSHIFT_WS_PORT,reuseaddr,fork TCP:localhost:8000 >> logs/socat_log 2>&1 &
+    socat TCP-L:$OPENSHIFT_WS_PORT,bind=$OPENSHIFT_WS_IP,reuseaddr,fork TCP:$OPENSHIFT_WS_IP:8000 >> logs/socat_log 2>&1 &
 }
 
 function test {
