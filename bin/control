@@ -19,9 +19,11 @@ function stop {
 function restart {
     echo -e "killall socat\n" >> logs/socat_log
     killall socat >> logs/socat_log 2>&1
-    echo -e "socat TCP-L:$OPENSHIFT_WS_EXTRA_PORT,bind=$OPENSHIFT_WS_IP,reuseaddr,fork PIPE:$OPENSHIFT_TMP_DIR/.websocket\n" >> logs/socat_log
+    #echo -e "socat TCP-L:$OPENSHIFT_WS_EXTRA_PORT,bind=$OPENSHIFT_WS_IP,reuseaddr,fork PIPE:$OPENSHIFT_TMP_DIR/.websocket\n" >> logs/socat_log
     #socat TCP-L:$OPENSHIFT_WS_EXTRA_PORT,bind=$OPENSHIFT_WS_IP,reuseaddr,fork TCP:$OPENSHIFT_WS_IP:$OPENSHIFT_WS_PORT -lf logs/socat_log &
-    socat TCP-L:$OPENSHIFT_WS_EXTRA_PORT,bind=$OPENSHIFT_WS_IP,reuseaddr,fork PIPE:$OPENSHIFT_TMP_DIR/.websocket -lf logs/socat_log &
+    #socat TCP-L:$OPENSHIFT_WS_EXTRA_PORT,bind=$OPENSHIFT_WS_IP,reuseaddr,fork PIPE:$OPENSHIFT_WS_DIR/.websocket -lf logs/socat_log &
+    socat TCP-L:$OPENSHIFT_WS_PORT,bind=$OPENSHIFT_WS_IP,reuseaddr,fork PIPE -lf logs/socat_log &
+    socat TCP-L:$OPENSHIFT_WS_EXTRA_PORT,bind=$OPENSHIFT_WS_IP,reuseaddr,fork PIPE -lf logs/socat_log &
 }
 
 function test {
