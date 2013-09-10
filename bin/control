@@ -24,17 +24,13 @@ function restart {
     #socat TCP-L:$OPENSHIFT_WS_EXTRA_PORT,bind=$OPENSHIFT_WS_IP,reuseaddr,fork PIPE:$OPENSHIFT_WS_DIR/.websocket -lf logs/socat_log &
     echo -e "Launching socat\n" >> logs/socat_log
     socat TCP-L:$OPENSHIFT_WS_PORT,bind=$OPENSHIFT_WS_IP,reuseaddr,fork PIPE -lf logs/socat_log &
-    socat TCP-L:$OPENSHIFT_WS_EXTRA_PORT,bind=$OPENSHIFT_WS_IP,reuseaddr,fork PIPE -lf logs/socat_log &
-    ps -aux >> logs/socat_log
+    #socat TCP-L:$OPENSHIFT_WS_EXTRA_PORT,bind=$OPENSHIFT_WS_IP,reuseaddr,fork PIPE -lf logs/socat_log &
+    
 }
 
 function test {
     echo -e "Begin test\n" >> logs/socat_log
-    echo -e "PATH=$PATH\n" >> logs/socat_log
-    echo -e "Socat can run?\n" >> logs/socat_log
-    socat -h >> logs/socat_log 2>&1
-    echo -e "Export\n" >> logs/socat_log
-    export >> logs/socat_log
+    ps -aux >> logs/socat_log
     echo -e "End test\n" >> logs/socat_log
 }
 
