@@ -7,7 +7,7 @@ source $OPENSHIFT_CARTRIDGE_SDK_BASH
 echo -e "[OpenShift] [websocket-cartridge] control - $1\n" >> logs/socat_log
 
 function start {
-    echo -e "socat TCP-L:$OPENSHIFT_WS_EXTRA_PORT,bind=$OPENSHIFT_WS_IP,reuseaddr,fork TCP:$OPENSHIFT_WS_IP:$OPENSHIFT_WS_PORT\n" >> logs/socat_log
+    #echo -e "socat TCP-L:$OPENSHIFT_WS_EXTRA_PORT,bind=$OPENSHIFT_WS_IP,reuseaddr,fork TCP:$OPENSHIFT_WS_IP:$OPENSHIFT_WS_PORT\n" >> logs/socat_log
     #socat TCP-L:$OPENSHIFT_WS_EXTRA_PORT,bind=$OPENSHIFT_WS_IP,reuseaddr,fork TCP:$OPENSHIFT_WS_IP:$OPENSHIFT_WS_PORT -lf logs/socat_log &
 }
 
@@ -22,8 +22,10 @@ function restart {
     #echo -e "socat TCP-L:$OPENSHIFT_WS_EXTRA_PORT,bind=$OPENSHIFT_WS_IP,reuseaddr,fork PIPE:$OPENSHIFT_TMP_DIR/.websocket\n" >> logs/socat_log
     #socat TCP-L:$OPENSHIFT_WS_EXTRA_PORT,bind=$OPENSHIFT_WS_IP,reuseaddr,fork TCP:$OPENSHIFT_WS_IP:$OPENSHIFT_WS_PORT -lf logs/socat_log &
     #socat TCP-L:$OPENSHIFT_WS_EXTRA_PORT,bind=$OPENSHIFT_WS_IP,reuseaddr,fork PIPE:$OPENSHIFT_WS_DIR/.websocket -lf logs/socat_log &
+    echo -e "Launching socat\n" >> logs/socat_log
     socat TCP-L:$OPENSHIFT_WS_PORT,bind=$OPENSHIFT_WS_IP,reuseaddr,fork PIPE -lf logs/socat_log &
     socat TCP-L:$OPENSHIFT_WS_EXTRA_PORT,bind=$OPENSHIFT_WS_IP,reuseaddr,fork PIPE -lf logs/socat_log &
+    ps -aux >> logs/socat_log
 }
 
 function test {
