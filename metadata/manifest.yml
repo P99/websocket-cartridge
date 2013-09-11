@@ -27,7 +27,7 @@ Install-Build-Required: false
 Endpoints:
   - Private-IP-Name:   IP
     Private-Port-Name: PORT
-    Private-Port:      8800
+    Private-Port:      17000
     Public-Port-Name:  PROXY_PORT
     Mappings:
       - Frontend:      ""

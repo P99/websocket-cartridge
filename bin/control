@@ -30,7 +30,7 @@ function restart {
 
 function test {
     echo -e "Begin test\n" >> logs/socat_log
-    ps -aux >> logs/socat_log
+    ps -aux >> logs/socat_log 2>&1
     echo -e "End test\n" >> logs/socat_log
 }
 
